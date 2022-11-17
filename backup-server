@@ -1,0 +1,18 @@
+#!/bin/bash
+
+CONFIG_FILE="/etc/backup.conf"
+
+# Read the configuration file
+if [[ -f "$CONFIG_FILE" ]]
+then
+    source "$CONFIG_FILE"
+else
+    echo "Configuration file not found!" >&2
+    exit 1
+fi
+
+# Backup the defined directories
+for DIRECTORY in "${DIRECTORIES[@]}"
+do
+    rsync -auvz -e "ssh -i /home/server-one/.ssh/backup-server" $DIRECTORY "backup-server@$IPADDR:/home/backup-server/backup"
+done

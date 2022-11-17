@@ -1,0 +1,8 @@
+[Unit]
+Description=Timer to start the gtwtr service which gets the weather everyday at 05:000
+
+[Timer]
+OnCalendar=*-*-* 05:00:00
+
+[Install]
+WantedBy=timers.target

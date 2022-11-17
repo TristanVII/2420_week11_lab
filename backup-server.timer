@@ -1,0 +1,11 @@
+[Unit]
+Description=Timer to start the backup-server service which will backup directories to a backup-server address every Friday at 01:00
+
+[Timer]
+RandomizedDelaySec=1800
+OnCalendar=Friday *-*-* 01:00:00
+Persistent=true
+
+
+[Install]
+WantedBy=timers.target
