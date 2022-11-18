@@ -18,8 +18,36 @@ mer file will define when it is ran. The default values for the timer will execu
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Program files are downloadable at https://github.com/TristanVII/2420_week11_lab.git 
+* The *backup-server.service* and the *backup-sever.timer* must be placed on your local machines /home/user/etc/systemd/system directory
+* The *backup-server* bashscript must be placed on your local machines /home/user/opt directory
+* The *backup-server.conf* must be placed on your local machines /home/user/etc directory
+   * To configure the destination IP address, and directories to backup, you must edit the *backup-server.conf* file's **IPADDR** and **DIRECTORIES** variables
+   * Directories must be seperated by spaces 
+   
+<img width="650" alt="Screenshot 2022-11-17 at 10 26 59 PM" src="https://user-images.githubusercontent.com/100272904/202638967-a06ad637-c7e1-41d6-b663-925a216d9d53.png">
+
+### Files Setup
+
+* The *backup-server.service* and *backup-server.timer* files must be enabled in order to create a symlink
+```
+sudo systemctl enable --now backup-server.service
+sudo systemctl enable --now backup-server.timer
+```
+* After each command you should execute the systemctl daemon-reload command to reload the systemd manager configuration
+```
+sudo systemctl daemon-reload
+```
+
+* Execute the following command to check the status of your service in order to make sur it is enabled
+```
+sudo systemctl status backup-server.service
+```
+
+Succesful output:
+
+<img width="883" alt="Screenshot 2022-11-17 at 10 59 18 PM" src="https://user-images.githubusercontent.com/100272904/202640907-d6239039-df84-4478-bf70-24d3c7f71db5.png">
+
 
 ### Executing program
 
