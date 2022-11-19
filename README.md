@@ -5,16 +5,16 @@ Script that backups directories to a server
 
 ## Description
 
-Backup server is a bashscript that allows users to backup chosen directories to a server's ip address. The program comes with the bash scrip, a .service file and a .timer file. The service will run the bashscript as a service and the ti
-mer file will define when it is ran. The default values for the timer will execute the *backup-server* script every Friday between 01:00:00 and 01:30:00.
+Backup server is a bashscript that allows users to backup chosen directories to a remote system's ip address. The program comes with the bash scrip, a .service file and a .timer file. The service will run the bashscript as a service and the timer file will define when it is ran. The default values for the timer will execute the *backup-server* script every Friday between 01:00:00 and 01:30:00.
 
 ## Getting Started
 
 ### Dependencies
 
 * Ability to use rsync
-* IP address of a server's virtual machine (I.E user@147.182.243.30)
-* The ssh key pair on the device running the script and the host  you are trying to connect to
+* File editor such as Vim or Nano to edit files
+* IP address of remote system (I.E user@147.182.243.30)
+* The ssh key pair on the device running the script and the host you are trying to connect to
 
 ### Installing
 
@@ -39,7 +39,7 @@ sudo systemctl enable --now backup-server.timer
 sudo systemctl daemon-reload
 ```
 
-* Execute the following command to check the status of your service in order to make sur it is enabled
+* Execute the following command to check the status of your service in order to make sure it is enabled
 ```
 sudo systemctl status backup-server.service
 ```
@@ -65,9 +65,29 @@ If the timer for *backup-server.service* is enabled succesfully, you should see 
 At this point the service and timer for the *backup-server* script should be enabled.
 Your machine will automatically run the script every Friday between 01:00:00 and 01:30:00
 
-### Help
+### How the Script Works
 
-## Issues with the *backup-server* bash script
+* The script first declares a Variable named *CONFIG_FILE* which is the path to the *backup-server.conf*
+* If the path provided is correct, the script will source it to get its variables that are written inside if the path is incorrect, the script will exit and output "Configuration file not found!"
+* For every directory listed in the *DIRECTORIES* variable in the *backup-server.conf* the script will loop through them and execute the following command
+```
+rsync -auvz -e "ssh -i /home/server-one/.ssh/backup-server" $DIRECTORY "backup-server@$IPADDR:/home/backup-server/backup"
+```
+* *rsync* is a command which copies files or directories to a remote system
+* For more information on the rsync function do ``` man rsync ``` 
+* The first argument is used to provide the ssh key needed to connect to the remove system **make sure this is the correct path to your private key**
+* The second argument is a directory from the directories listed in the *DIRECTORIES* variable inside the *backup-server.conf*
+* The last argument is the remote systems full IP address to connect to **user@ip** followed by the path you wish to copy the directory to
+* Make sure you have the correct IP address declared as the variable *IPADDR* inside the *backup-server.conf* file and that you have the correct user name of your for your remote machine
+
+**backup-server bash script code**
+
+<img width="1132" alt="Screenshot 2022-11-18 at 7 49 18 PM" src="https://user-images.githubusercontent.com/100272904/202832920-1358daef-c7c3-4b15-8d97-ba637b9c153a.png">
+
+
+## Help
+
+### Issues with the *backup-server* bash script
 
 * Make sure you have the server's IP address you are trying to backup files to private key inside your *.ssh* directory and the the server has the public key inside this *.ssh/authorized_keys*
 * Make sure the *backup-server.conf* variables have the correct syntax. Directories should be seperated by spaces, inside parentheses '()' and no spaces between the variable and the equals sign
@@ -86,6 +106,5 @@ Succesful output:
 
 ### Authors
 
-Tristan Davis
-Sandeep Kaur
+Tristan Davis & Sandeep Kaur
 
