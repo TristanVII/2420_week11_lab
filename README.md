@@ -5,7 +5,7 @@ Script that backups directories to a server
 
 ## Description
 
-Backup server is a bashscript that allows users to backup chosen directories to a remote system's ip address. The program comes with the bash script, a .service file and a .timer file. The service will run the bashscript as a service and the timer file will define when it is ran. The default values for the timer will execute the *backup-server* script every Friday between 01:00:00 and 01:30:00.
+Backup server is a bashscript that allows users to backup chosen directories to a remote system's ip address. The program comes with the bash script, a .service file and a .timer file. The service will run the bashscript as a service and the timer file will define when it is ran. The default values for the timer will execute the *backup-server* script every Friday between 01:00:00 and 01:30:00.This is done so if you had this service on many servers they wouldn’t all start backing up files at exactly at the same time. Timer also include a directive to automatically run the timer if a run is missed. 
 
 ## Getting Started
 
@@ -90,10 +90,10 @@ rsync -auvz -e "ssh -i /home/server-one/.ssh/backup-server" $DIRECTORY "backup-s
 ```
 * *rsync* is a command which copies files or directories to a remote system
 * For more information on the rsync function do ``` man rsync ``` 
-* The first argument is used to provide the ssh key needed to connect to the remove system **make sure this is the correct path to your private key**
+* The first argument is used to provide the ssh key needed to connect to the remote system **make sure this is the correct path to your private key**
 * The second argument is a directory from the directories listed in the *DIRECTORIES* variable inside the *backup-server.conf*
 * The last argument is the remote systems full IP address to connect to **user@ip** followed by the path you wish to copy the directory to
-* Make sure you have the correct IP address declared as the variable *IPADDR* inside the *backup-server.conf* file and that you have the correct user name of your for your remote machine
+* Make sure you have the correct IP address declared as the variable *IPADDR* inside the *backup-server.conf* file and that you have the correct user name of your remote machine
 
 **backup-server bash script code**
 
@@ -104,7 +104,7 @@ rsync -auvz -e "ssh -i /home/server-one/.ssh/backup-server" $DIRECTORY "backup-s
 
 ### Issues with the *backup-server* bash script
 
-* Make sure you have the server's IP address you are trying to backup files to private key inside your *.ssh* directory and the the server has the public key inside this *.ssh/authorized_keys*
+* Make sure you have the server's IP address you are trying to backup files to private key inside your *.ssh* directory and the server has the public key inside this *.ssh/authorized_keys*
 * Make sure the *backup-server.conf* variables have the correct syntax. Directories should be seperated by spaces, inside parentheses '()' and no spaces between the variable and the equals sign
 * Make sure you have the correct IPADDR inside the *backup-server.conf*
 * Make sure the *backup-server* bash script is executable, if it isn't execute the command ```chmod +x backup-server ```
