@@ -5,7 +5,7 @@ Script that backups directories to a server
 
 ## Description
 
-Backup server is a bashscript that allows users to backup chosen directories to a remote system's ip address. The program comes with the bash scrip, a .service file and a .timer file. The service will run the bashscript as a service and the timer file will define when it is ran. The default values for the timer will execute the *backup-server* script every Friday between 01:00:00 and 01:30:00.
+Backup server is a bashscript that allows users to backup chosen directories to a remote system's ip address. The program comes with the bash script, a .service file and a .timer file. The service will run the bashscript as a service and the timer file will define when it is ran. The default values for the timer will execute the *backup-server* script every Friday between 01:00:00 and 01:30:00.
 
 ## Getting Started
 
@@ -17,6 +17,19 @@ Backup server is a bashscript that allows users to backup chosen directories to 
 * The ssh key pair on the device running the script and the host you are trying to connect to
 
 ### Installing
+* Do the setup for the droplets by following the video below.
+
+https://vimeo.com/758870226/f75da348fc?embedded=true&source=vimeo_logo&owner=17609105
+
+* Complete the steps in the video and create 2 droplets.
+* Rename one of the droplet's name to server-one using 
+```
+sudo hostnamectl set-hostname server-one
+```
+* Rename the other droplets name to backup-server using 
+```
+sudo hostnamectl set-hostname backup-server
+```
 
 * Program files are downloadable at https://github.com/TristanVII/2420_week11_lab.git 
 * The *backup-server.service* and the *backup-sever.timer* must be placed on your local machines /home/user/etc/systemd/system directory
