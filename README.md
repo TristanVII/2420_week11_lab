@@ -19,9 +19,10 @@ Backup server is a bashscript that allows users to backup chosen directories to 
 ### Installing
 * Do the setup for the droplets by following the video below.
 
-https://vimeo.com/758870226/f75da348fc?embedded=true&source=vimeo_logo&owner=17609105
-
-* Complete the steps in the video and create 2 droplets.
+  https://vimeo.com/758870226/f75da348fc?embedded=true&source=vimeo_logo&owner=17609105
+* After following the video you will have 1 regular user which is allowed to ssh into th droplet while the root user will not have access to the droplet. 
+* Repeat the steps in the video and create a new droplet. 
+* After completing the steps 2 time you will have 2 droplets with 2 regular users. 
 * Rename one of the droplet's name to server-one using 
 ```
 sudo hostnamectl set-hostname server-one
@@ -30,7 +31,8 @@ sudo hostnamectl set-hostname server-one
 ```
 sudo hostnamectl set-hostname backup-server
 ```
-
+* Now create a new key pair on server-one and copy the the public key to the backup-server.
+* Once you have copied the key you can append the new public key to the authorized keys file with ``` >> ``` to append.
 * Program files are downloadable at https://github.com/TristanVII/2420_week11_lab.git 
 * The *backup-server.service* and the *backup-sever.timer* must be placed on your local machines /home/user/etc/systemd/system directory
 * The *backup-server* bashscript must be placed on your local machines /home/user/opt directory
