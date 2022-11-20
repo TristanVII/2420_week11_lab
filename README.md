@@ -13,7 +13,7 @@ Backup server is a bashscript that allows users to backup chosen directories to 
 
 * Ability to use rsync
 * File editor such as Vim or Nano to edit files
-* IP address of remote system (I.E user@147.182.243.30)
+* IP address of remote system (I.E user@147.182.243.30) # Change this ip address to the public ip address of your droplet. 
 * The ssh key pair on the device running the script and the host you are trying to connect to
 
 ### Installing
