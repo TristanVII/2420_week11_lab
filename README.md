@@ -17,8 +17,7 @@ Backup server is a bashscript that allows users to backup chosen directories to 
 * The ssh key pair on the device running the script and the host you are trying to connect to
 
 ### Installing
-* Do the setup for the droplets by following the video below.
-* <a href="https://vimeo.com/758870226/f75da348fc?embedded=true&source=vimeo_logo&owner=17609105" target="_blank">DO Setup</a>
+* Do the setup for the droplets by following the video : <a href="https://vimeo.com/758870226/f75da348fc?embedded=true&source=vimeo_logo&owner=17609105" target="_blank">DO Setup</a>
   
 * After following the video you will have 1 regular user which is allowed to ssh into the droplet while the root user will not have access to the droplet. 
 * Repeat the steps in the video and create a new droplet. 
